@@ -42,6 +42,7 @@ public class PedidoService {
 			if (savedPedido == null) {
 				throw new ResourceNotFoundException("Pedido não encontrado para atualização: " + pedido.getId());
 			}
+			reduzirEstoqueAposVenda(savedPedido);  // Adicione esta linha
 			return savedPedido;
 		} catch (ResourceNotFoundException | IllegalArgumentException e) {
 			throw e;
@@ -116,6 +117,14 @@ public class PedidoService {
 
 			Produto produto = produtoService.findById(item.getProdutoId());
 			item.setPrecoUnitario(produto.getPreco());
+		}
+	}
+
+	private void reduzirEstoqueAposVenda(Pedido pedido) {
+		for (ItemPedido item : pedido.getItens()) {
+			Produto produto = produtoService.findById(item.getProdutoId());
+			int novoEstoque = produto.getEstoque() - item.getQuantidade();
+			produtoService.atualizarEstoque(item.getProdutoId(), novoEstoque);
 		}
 	}
 }

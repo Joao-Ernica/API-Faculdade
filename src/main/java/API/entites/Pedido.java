@@ -1,5 +1,6 @@
 package API.entites;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,8 @@ public class Pedido {
 	private Integer clienteId;
 	private LocalDateTime dataPedido;
 	private String status;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Cliente cliente;
 
 	@Builder.Default
