@@ -1,0 +1,30 @@
+meta {
+  name: pedido
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/pedidos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "clienteId": 1,
+      "status": "PENDENTE",
+      "itens": [
+          {
+              "produtoId": 1,
+              "quantidade": 26,
+              "precoUnitario": 1999.99
+          },
+          {
+              "produtoId": 3,
+              "quantidade": 32,
+              "precoUnitario": 299.99
+          }
+      ]
+  }
+}

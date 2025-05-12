@@ -1,0 +1,20 @@
+meta {
+  name: cliente
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/clientes
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "nome": "Generico1",
+      "email": "Generico.teste@exemplo.com",
+      "telefone": "18 97777-6666",
+      "senha": "123456789"
+  }
+}

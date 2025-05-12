@@ -36,11 +36,16 @@ public class PedidoRepository {
 					.precoUnitario(rs.getBigDecimal("preco_unitario"))
 					.build();
 
+	private void loadPedidoRelationships(Pedido pedido) {
+		String sql = "SELECT * FROM itens_pedido WHERE pedido_id = ?";
+		List<ItemPedido> itens = jdbcTemplate.query(sql, itemPedidoRowMapper, pedido.getId());
+		pedido.setItens(itens);
+	}
+
 	public List<Pedido> findAll() {
 		String sql = "SELECT * FROM pedidos ORDER BY data_pedido DESC";
 		List<Pedido> pedidos = jdbcTemplate.query(sql, pedidoRowMapper);
 
-		// Carregar itens para cada pedido
 		for (Pedido pedido : pedidos) {
 			loadPedidoRelationships(pedido);
 		}
@@ -60,12 +65,6 @@ public class PedidoRepository {
 		loadPedidoRelationships(pedido);
 
 		return Optional.of(pedido);
-	}
-
-	private void loadPedidoRelationships(Pedido pedido) {
-		String sql = "SELECT * FROM itens_pedido WHERE pedido_id = ?";
-		List<ItemPedido> itens = jdbcTemplate.query(sql, itemPedidoRowMapper, pedido.getId());
-		pedido.setItens(itens);
 	}
 
 	public Pedido save(Pedido pedido) {

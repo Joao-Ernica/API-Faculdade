@@ -37,12 +37,20 @@ public class PedidoService {
 	@Transactional
 	public Pedido save(Pedido pedido) {
 		try {
+			if (pedido.getId() != null) {
+				Pedido pedidoExistente = findById(pedido.getId());
+
+				if (pedido.getDataPedido() == null) {
+					pedido.setDataPedido(pedidoExistente.getDataPedido());
+				}
+			}
+
 			verificarEstoqueDisponivel(pedido);
 			Pedido savedPedido = pedidoRepository.save(pedido);
 			if (savedPedido == null) {
 				throw new ResourceNotFoundException("Pedido não encontrado para atualização: " + pedido.getId());
 			}
-			reduzirEstoqueAposVenda(savedPedido);  // Adicione esta linha
+			reduzirEstoqueAposVenda(savedPedido);
 			return savedPedido;
 		} catch (ResourceNotFoundException | IllegalArgumentException e) {
 			throw e;

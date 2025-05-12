@@ -11,7 +11,7 @@ CREATE TABLE produtos (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(255),
     preco DECIMAL(10, 2) NOT NULL,
-    estoque INT DEFAULT 0 NOT NULL
+    estoque INT DEFAULT 0
 );
 
 CREATE TABLE pedidos (

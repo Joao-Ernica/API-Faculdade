@@ -1,0 +1,17 @@
+meta {
+  name: status
+  type: http
+  seq: 1
+}
+
+patch {
+  url: http://localhost:8080/api/pedidos/1/status
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "status": "PAGO"
+  }
+}

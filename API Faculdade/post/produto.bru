@@ -1,0 +1,20 @@
+meta {
+  name: produto
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/produtos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "nome": "Uma API complicada",
+      "descricao": "Uma historia de drama, escrita pelos alunos de ciencia da computação",
+      "preco": 1999.99,
+      "estoque": 50
+  }
+}

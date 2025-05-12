@@ -72,6 +72,7 @@ public class ClienteRepository {
 						cliente.getSenha(),
 						cliente.getId()
 				);
+
 			} else {
 				linhasAfetadas = jdbcTemplate.update(
 						"UPDATE clientes SET nome = ?, email = ?, telefone = ? WHERE id = ?",
