@@ -18,7 +18,7 @@ public class Cliente {
 	private String telefone;
 
 	// Isso faz com que a senha seja incluída na deserialização (leitura),
-	// mas excluída da serialização (escrita/resposta)
+	// mas excluída da serialização (resposta)
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String senha;
 }
